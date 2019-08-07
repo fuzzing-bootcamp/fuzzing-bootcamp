@@ -1,0 +1,51 @@
+ {
+    "version": "2.0.0",
+    "tasks": [
+        
+        {
+            "type": "shell",
+            "label": "build",
+            "command": "if [ ! -d \"~/training/projects/woff2-2016-05-06/build\" ]; then mkdir ~/training/projects/woff2-2016-05-06/build; fi && cd ~/training/projects/woff2-2016-05-06/build && bash ../build.sh",
+            
+            "group": "build",
+
+            "problemMatcher": [],
+
+            "presentation": {
+                "reveal": "always",
+                "panel": "new"
+            }
+        },
+
+        {
+            "type": "shell",
+            "label": "clean",
+            "command": "if [ ! -d \"~/training/projects/woff2-2016-05-06/build\" ]; then rm -rf ~/training/projects/woff2-2016-05-06/build; fi",
+            
+            "group": "build",
+
+            "problemMatcher": [],
+
+            "presentation": {
+                "reveal": "always",
+                "panel": "new"
+            }
+        },
+         
+        {
+            "type": "shell",
+            "label": "run-fuzzer",
+
+            "command": "cd ~/training/projects/woff2-2016-05-06/build/ && ./woff2-2016-05-06-fsanitize_fuzzer",
+            
+            "group": "build",
+
+            "problemMatcher": [],
+
+            "presentation": {
+                "reveal": "always",
+                "panel": "new"
+            }
+        }
+    ]
+  }

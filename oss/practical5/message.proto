@@ -1,0 +1,9 @@
+syntax = "proto2";
+
+package pb;
+
+message Msg {
+    optional int64 session_id = 1;
+    optional int64 user_id = 2;
+    optional string greeting = 3;
+}

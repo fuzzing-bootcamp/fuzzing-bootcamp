@@ -1,0 +1,51 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        
+        {
+            "type": "shell",
+            "label": "build",
+            "command": "if [ ! -d \"~/training/projects/libpng-1.2.56/build\" ]; then mkdir ~/training/projects/libpng-1.2.56/build; fi && cd ~/training/projects/libpng-1.2.56/build && bash ../build.sh",
+            
+            "group": "build",
+
+            "problemMatcher": [],
+
+            "presentation": {
+                "reveal": "always",
+                "panel": "new"
+            }
+        },
+
+        {
+            "type": "shell",
+            "label": "clean",
+            "command": "if [ ! -d \"~/training/projects/libpng-1.2.56/build\" ]; then rm -rf build; fi",
+            
+            "group": "build",
+
+            "problemMatcher": [],
+
+            "presentation": {
+                "reveal": "always",
+                "panel": "new"
+            }
+        },
+         
+        {
+            "type": "shell",
+            "label": "run-fuzzer",
+
+            "command": "cd ~/training/projects/libpng-1.2.56/build/ && bash ../test-libfuzzer.sh",
+            
+            "group": "build",
+
+            "problemMatcher": [],
+
+            "presentation": {
+                "reveal": "always",
+                "panel": "new"
+            }
+        }
+    ]
+  }

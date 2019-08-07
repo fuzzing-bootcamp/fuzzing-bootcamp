@@ -1,0 +1,51 @@
+ {
+    "version": "2.0.0",
+    "tasks": [
+        
+        {
+            "type": "shell",
+            "label": "build",
+            "command": "if [ ! -d \"~/training/projects/openssl-1.0.2d/build\" ]; then mkdir ~/training/projects/openssl-1.0.2d/build; fi && cd ~/training/projects/openssl-1.0.2d/build && bash ../build.sh",
+            
+            "group": "build",
+
+            "problemMatcher": [],
+
+            "presentation": {
+                "reveal": "always",
+                "panel": "new"
+            }
+        },
+
+        {
+            "type": "shell",
+            "label": "clean",
+            "command": "if [ ! -d \"~/training/projects/openssl-1.0.2d/build\" ]; then rm -rf ~/training/projects/openssl-1.0.2d/build; fi",
+            
+            "group": "build",
+
+            "problemMatcher": [],
+
+            "presentation": {
+                "reveal": "always",
+                "panel": "new"
+            }
+        },
+         
+        {
+            "type": "shell",
+            "label": "run-fuzzer",
+
+            "command": "cd ~/training/projects/openssl-1.0.2d/build/ && bash ../test-libfuzzer.sh",
+            
+            "group": "build",
+
+            "problemMatcher": [],
+
+            "presentation": {
+                "reveal": "always",
+                "panel": "new"
+            }
+        }
+    ]
+  }

@@ -1,0 +1,67 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        
+        {
+            "type": "shell",
+            "label": "build",
+            "command": "if [ ! -d \"~/training/projects/openssl-1.1.0c/build\" ]; then mkdir ~/training/projects/openssl-1.1.0c/build; fi && cd ~/training/projects/openssl-1.1.0c/build && bash ../build.sh",
+            
+            "group": "build",
+
+            "problemMatcher": [],
+
+            "presentation": {
+                "reveal": "always",
+                "panel": "new"
+            }
+        },
+
+        {
+            "type": "shell",
+            "label": "clean",
+            "command": "if [ ! -d \"~/training/projects/openssl-1.1.0c/build\" ]; then rm -rf ~/training/projects/openssl-1.1.0c/build; fi",
+            
+            "group": "build",
+
+            "problemMatcher": [],
+
+            "presentation": {
+                "reveal": "always",
+                "panel": "new"
+            }
+        },
+         
+        {
+            "type": "shell",
+            "label": "run-fuzzer-bignum",
+
+            "command": "cd ~/training/projects/openssl-1.1.0c/build/ && ./openssl-1.1.0c-fsanitize_fuzzer-bignum",
+            
+            "group": "build",
+
+            "problemMatcher": [],
+
+            "presentation": {
+                "reveal": "always",
+                "panel": "new"
+            }
+        },
+         
+        {
+            "type": "shell",
+            "label": "run-fuzzer-x509",
+
+            "command": "cd ~/training/projects/openssl-1.1.0c/build/ && ./openssl-1.1.0c-fsanitize_fuzzer-x509",
+            
+            "group": "build",
+
+            "problemMatcher": [],
+
+            "presentation": {
+                "reveal": "always",
+                "panel": "new"
+            }
+        }
+    ]
+  }
