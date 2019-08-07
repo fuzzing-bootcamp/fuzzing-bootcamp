@@ -30,34 +30,4 @@ extern "C" int LLVMFuzzerTestOneInput(const uint8_t *Data, size_t Size) {
 extern "C" size_t
 LLVMFuzzerMutate(uint8_t *Data, size_t Size, size_t MaxSize);
 
-// The custom mutator:
-//   * deserialize the data (in this case, uncompress).
-//     * If the data doesn't deserialize, create a properly serialized dummy.
-//   * Mutate the deserialized data (in this case, just call LLVMFuzzerMutate).
-//   * Serialize the mutated data (in this case, compress).
-extern "C" size_t LLVMFuzzerCustomMutator(uint8_t *Data, size_t Size,
-                                          size_t MaxSize, unsigned int Seed) {
-  uint8_t Uncompressed[100];
-  size_t UncompressedLen = sizeof(Uncompressed);
-  size_t CompressedLen = MaxSize;
-  if (Z_OK != uncompress(Uncompressed, &UncompressedLen, Data, Size)) {
-    // The data didn't uncompress.
-    // So, it's either a broken input and we want to ignore it,
-    // or we've started fuzzing from an empty corpus and we need to supply
-    // out first properly compressed input.
-    uint8_t Dummy[] = {'H', 'i'};
-    if (Z_OK != compress(Data, &CompressedLen, Dummy, sizeof(Dummy))) {
-      fprintf(stderr, "Couldn't compress, dummy: max %zd res %zd\n", sizeof(Dummy), CompressedLen);
-      return 0;
-    }
-    // fprintf(stderr, "Dummy: max %zd res %zd\n", MaxSize, CompressedLen);
-    return CompressedLen;
-  }
-  UncompressedLen =
-      LLVMFuzzerMutate(Uncompressed, UncompressedLen, sizeof(Uncompressed));
-  if (Z_OK != compress(Data, &CompressedLen, Uncompressed, UncompressedLen))
-    return 0;
-  return CompressedLen;
-}
-
 #endif  // CUSTOM_MUTATOR
